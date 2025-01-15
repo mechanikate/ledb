@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Latin Endings DB</title>
+</head>
+<body>
+<script src="ledb.js"></script>
+<script>
+const longFormsClass = {
+    "n": "noun",
+    "v": "verb",
+    "a": "adjective",
+    "rp": "relativePronoun"
+};
+function updateDisables(choice = "n") {
+    [...document.getElementsByClassName(longFormsClass[choice])].forEach(e => e.removeAttribute("disabled"));
+    Object.keys(longFormsClass).filter(e => e !== choice).map(e => longFormsClass[e]).forEach(pos =>  [...document.getElementsByClassName(pos)].forEach(e => e.setAttribute("disabled","")))
+}
+function getSelection() {
+    let base = endings[partOfSpeech.value];
+    switch(partOfSpeech.value) {
+        case "n":  
+            endingToggle.innerHTML = "ENDING: -";
+            return answer.innerHTML = base[nounDeclension.value][nounGender.value][nounCount.value][nounCase.value];
+        case "v":  
+            endingToggle.innerHTML = "ENDING: -";
+            return answer.innerHTML = base[verbDeclension.value][verbCount.value][verbCase.value];
+        case "a":  
+            endingToggle.innerHTML = "ENDING: -";
+            return answer.innerHTML = base[adjectiveDeclension.value][adjectiveGender.value][adjectiveCount.value][adjectiveCase.value];
+        case "rp":
+            endingToggle.innerHTML = "RELATIVE PRONOUN: ";
+            return answer.innerHTML = base[relativePronounCase.value][relativePronounCount.value][relativePronounGender.value];
+    }
+}
+window.onload = () => {
+    [...document.querySelectorAll(".noun, .verb, .adjective, .relativePronoun")].forEach(e => e.addEventListener("change", getSelection));
+    [...document.querySelectorAll(".verb, .adjective, .relativePronoun")].forEach(e => e.setAttribute("disabled",""));
+};
+</script>
+<label for="partofspeech">Part of Speech</label>
+<select name="partofspeech" id="partOfSpeech" onchange="updateDisables(this.value);">
+    <option value="n">Noun</option>
+    <option value="v">Verb</option>
+    <option value="a">Adjective</option>
+    <option value="rp">Relative Pronoun</option>
+</select>
+<div id="nounOptions" class="noun">
+    <select name="nounDeclension" id="nounDeclension" class="noun">
+        <option value=1>1st</option>
+        <option value=2>2nd</option>
+        <option value=3>3rd</option>
+    </select>
+    <select name="nounGender" id="nounGender" class="noun">
+        <option value="m">Masculine</option>
+        <option value="f">Feminine</option>
+        <option value="n">Neuter</option>
+    </select>
+    <select name="nounCount" id="nounCount" class="noun">
+        <option value="sg">Singular</option>
+        <option value="pl">Plural</option>
+    </select>
+    <select name="nounCase" id="nounCase" class="noun">
+        <option value="nom">Nominative</option>
+        <option value="voc">Vocative</option>
+        <option value="gen">Genitive</option>
+        <option value="dat">Dative</option>
+        <option value="acc">Accusative</option>
+        <option value="abl">Ablative</option>
+    </select>
+</div>
+<div id="verbOptions" class="verb">
+    <select name="verbDeclension" id="verbDeclension" class="verb">
+        <option value=1>1st</option>
+        <option value=2>2nd</option>
+        <option value=3>3rd</option>
+    </select>
+    <select name="verbCount" id="verbCount" class="verb">
+        <option value="sg">Singular</option>
+        <option value="pl">Plural</option>
+    </select>
+    <select name="verbCase" id="verbCase" class="verb">
+        <option value="imp">Imperfect</option>
+        <option value="prs">Present</option>
+        <option value="prf">Perfect</option>
+    </select>
+</div>
+<div id="adjectiveOptions" class="adjective">
+    <select name="adjectiveDeclension" id="adjectiveDeclension" class="adjective">
+        <option value=1>1st/2nd</option>
+        <option value=3>3rd</option>
+    </select>
+    <select name="adjectiveGender" id="adjectiveGender" class="adjective">
+        <option value="m">Masculine</option>
+        <option value="f">Feminine</option>
+        <option value="n">Neuter</option>
+    </select>
+    <select name="adjectiveCount" id="adjectiveCount" class="adjective">
+        <option value="sg">Singular</option>
+        <option value="pl">Plural</option>
+    </select>
+    <select name="adjectiveCase" id="adjectiveCase" class="adjective">
+        <option value="nom">Nominative</option>
+        <option value="gen">Genitive</option>
+        <option value="dat">Dative</option>
+        <option value="acc">Accusative</option>
+        <option value="abl">Ablative</option>
+    </select>
+</div>
+<div id="relativePronounOptions" class="relativePronoun">
+    <select name="relativePronounCase" id="relativePronounCase" class="relativePronoun">
+        <option value="nom">Nominative</option>
+        <option value="acc">Accusative</option>
+    </select>
+    <select name="relativePronounCount" id="relativePronounCount" class="relativePronoun">
+        <option value="sg">Singular</option>
+        <option value="pl">Plural</option>
+    </select>
+    <select name="relativePronounGender" id="relativePronounGender" class="relativePronoun">
+        <option value="m">Masculine</option>
+        <option value="f">Feminine</option>
+        <option value="n">Neuter</option>
+    </select>
+</div>
+<span id="endingToggle">ENDING: -</span><span id="answer">a</span>
+</body>
+</html>
