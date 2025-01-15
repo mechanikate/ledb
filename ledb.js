@@ -1,4 +1,6 @@
 const ANY = "*";
+const UNKNOWN = "?";
+const IMPOSSIBLE = "\u2612";
 const endings = {
     "n": [
         null,
@@ -41,20 +43,20 @@ const endings = {
             },
             "n": {
                 "sg": {
-                    "nom": "N/A",
-                    "voc": "N/A",
-                    "gen": "N/A",
-                    "dat": "N/A",
-                    "acc": "N/A",
-                    "abl": "N/A"
+                    "nom": IMPOSSIBLE,
+                    "voc": IMPOSSIBLE,
+                    "gen": IMPOSSIBLE,
+                    "dat": IMPOSSIBLE,
+                    "acc": IMPOSSIBLE,
+                    "abl": IMPOSSIBLE
                 }, 
                 "pl": {
-                    "nom": "N/A",
-                    "voc": "N/A",
-                    "gen": "N/A",
-                    "dat": "N/A",
-                    "acc": "N/A",
-                    "abl": "N/A"
+                    "nom": IMPOSSIBLE,
+                    "voc": IMPOSSIBLE,
+                    "gen": IMPOSSIBLE,
+                    "dat": IMPOSSIBLE,
+                    "acc": IMPOSSIBLE,
+                    "abl": IMPOSSIBLE
                 }
             }
         },
@@ -155,7 +157,7 @@ const endings = {
                 "sg": {
                     "nom": ANY,
                     "voc": ANY,
-                    "gen": "is",
+					"gen": "is",
                     "dat": "\u012B",
                     "acc": ANY,
                     "abl": "e"
@@ -169,7 +171,131 @@ const endings = {
                     "abl": "ibus"
                 }
             }
-        }
+        },
+	    {
+		    "m": {
+				"sg": {
+					"nom": "us",
+                    "voc": ANY,
+					"loc": UNKNOWN,
+                    "gen": "\u016Bs",
+                    "dat": "u\u012B",
+                    "acc": "um",
+                    "abl": "\u016B"
+				}, 
+				"pl": {
+					"nom": "\u016Bs",
+                    "voc": "",
+					"loc": "",
+                    "gen": "uum",
+                    "dat": "ibus",
+                    "acc": "\u016Bs",
+                    "abl": "ibus"
+				}
+			},
+			"f": {
+				"sg": {
+					"nom": "us",
+                    "voc": UNKNOWN,
+					"loc": UNKNOWN,
+                    "gen": "\u016Bs",
+                    "dat": "u\u012B",
+                    "acc": "um",
+                    "abl": "\u016B"
+				}, 
+				"pl": {
+					"nom": "\u016Bs",
+                    "voc": UNKNOWN,
+					"loc": UNKNOWN,
+                    "gen": "uum",
+                    "dat": "ibus",
+                    "acc": "\u016Bs",
+                    "abl": "ibus"
+				}
+			},
+			"n": {
+				"sg": {
+					"nom": "\u016B",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u016Bs",
+					"dat": "\u016B",
+					"acc": "\u016B",
+					"abl": "\u016B",
+				},
+				"pl": {
+					"nom": "ua",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "uum",
+					"dat": "ibus",
+					"acc": "ua",
+					"abl": "ibus"
+				}
+			}
+		},
+		{
+			"m": {
+				"sg": {
+					"nom": "\u0113s",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u0113\u012B",
+					"dat": "\u0113\u012B",
+					"acc": "em",
+					"abl": "\u0113"
+				},
+				"pl": {
+					"nom": "\u0113s",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u0113rum",
+					"dat": "\u0113bus",
+					"acc": "\u0113s",
+					"abl": "\u0113bus"
+				}
+			},
+			"f": {
+				"sg": {
+					"nom": "\u0113s",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u0113\u012B",
+					"dat": "\u0113\u012B",
+					"acc": "em",
+					"abl": "\u0113"
+				},
+				"pl": {
+					"nom": "\u0113s",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u0113rum",
+					"dat": "\u0113bus",
+					"acc": "\u0113s",
+					"abl": "\u0113bus"
+				}
+			},
+			"n": {
+				"sg": {
+					"nom": "\u0113s",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u0113\u012B",
+					"dat": "\u0113\u012B",
+					"acc": "em",
+					"abl": "\u0113"
+				},
+				"pl": {
+					"nom": "\u0113s",
+					"voc": UNKNOWN,
+					"loc": UNKNOWN,
+					"gen": "\u0113rum",
+					"dat": "\u0113bus",
+					"acc": "\u0113s",
+					"abl": "\u0113bus"
+				}
+			}
+		}
     ],
     "v": [
         null,
@@ -393,5 +519,7 @@ const endings = {
 };
 const LEDB = {
 	"endings": endings,
-	"any": ANY
-}
+	"any": ANY,
+	"unknown": UNKNOWN,
+	"impossible": IMPOSSIBLE
+};
