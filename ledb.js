@@ -120,7 +120,7 @@ const endings = {
             "m": {
                 "sg": {
                     "nom": ANY,
-                    "voc": ANY,
+                    "voc": UNKNOWN,
                     "gen": "is",
                     "dat": "\u012B",
                     "acc": "em",
@@ -138,7 +138,7 @@ const endings = {
             "f": {
                 "sg": {
                     "nom": ANY,
-                    "voc": ANY,
+                    "voc": UNKNOWN,
                     "gen": "is",
                     "dat": "\u012B",
                     "acc": "em",
@@ -156,7 +156,7 @@ const endings = {
             "n": {
                 "sg": {
                     "nom": ANY,
-                    "voc": ANY,
+                    "voc": UNKNOWN,
 					"gen": "is",
                     "dat": "\u012B",
                     "acc": ANY,
@@ -176,7 +176,7 @@ const endings = {
 		    "m": {
 				"sg": {
 					"nom": "us",
-                    "voc": ANY,
+                    "voc": UNKNOWN,
 					"loc": UNKNOWN,
                     "gen": "\u016Bs",
                     "dat": "u\u012B",
@@ -185,8 +185,8 @@ const endings = {
 				}, 
 				"pl": {
 					"nom": "\u016Bs",
-                    "voc": "",
-					"loc": "",
+                    "voc": UNKNOWN,
+					"loc": UNKNOWN,
                     "gen": "uum",
                     "dat": "ibus",
                     "acc": "\u016Bs",
