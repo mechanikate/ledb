@@ -1,10 +1,67 @@
 const ANY = "*";
 const UNKNOWN = "?";
-const IMPOSSIBLE = "\u2612";
+const IMPOSSIBLE = "\u2612"; // ☒
+const SOURCES_USED = [ // * indicates wildcard/all of the above 
+    {
+        "where": [
+            "n.*"
+        ],
+        "urls": [
+            "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions",
+			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/resources/stage-1-latin-grammar-resource/nouns/"
+        ]
+    },
+	{
+		"where": [
+			"n.3.*"
+		],
+		"urls": [
+			"https://www.usu.edu/markdamen/latin1000/Chapters/07ch.htm"
+		]
+	},
+    {
+        "where": [
+            "v.*"
+        ],
+        "urls": [
+            "https://classicalliberalarts.com/classical-trivium/latin-verb-conjugation-chart/"
+        ]
+        
+    },
+    {
+        "where": [
+            "rp.*"
+        ],
+        "urls": [
+            "https://dcc.dickinson.edu/grammar/latin/relative-interrogative-and-indefinite-pronouns"
+        ]
+    },
+	{
+		"where": [
+			"a.1.*",
+			"a.2.*"
+		],
+		"urls": [
+			"https://dcc.dickinson.edu/grammar/latin/1st-and-2nd-declension-adjectives-%C4%81-o-stems",
+			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/lessons/lesson-5-first-and-second-declension-adjectives-ego-and-nos/",
+			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject12.PDF"
+		]
+	},
+	{
+		"where": [
+			"a.3.*"
+		],
+		"urls": [
+			"https://dcc.dickinson.edu/grammar/latin/3rd-declension-adjectives-classification-and-paradigms",
+			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/lessons/lesson-7-third-declension-nouns-and-adjectives/",
+			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject3.PDF"
+		]
+	}
+];
 const endings = {
     "n": [
-        null,
-        {
+        null, // 0th declension (nonexistent)
+        { // 1st declension
             "m": {
                 "sg": {
                     "nom": "a",
@@ -60,7 +117,7 @@ const endings = {
                 }
             }
         },
-        {
+        { // 2nd declension
             "m": {
                 "sg": {
                     "nom": "us",
@@ -116,7 +173,7 @@ const endings = {
                 }
             }
         },
-        {
+        { // 3rd declension
             "m": {
                 "sg": {
                     "nom": ANY,
@@ -172,11 +229,17 @@ const endings = {
                 }
             }
         },
-	    {
+        /**
+         * NOTE:
+         * Vocative endings for 4th/5th sourced from one source:
+         * https://dcc.dickinson.edu/sites/default/files/Case_endings_5_decl_2.pdf
+         * Any additional sources are welcome!
+         */
+	    { // 4th declension
 		    "m": {
 				"sg": {
 					"nom": "us",
-                    "voc": UNKNOWN,
+                    "voc": "\u016Bs",
 					"loc": UNKNOWN,
                     "gen": "\u016Bs",
                     "dat": "u\u012B",
@@ -185,7 +248,7 @@ const endings = {
 				}, 
 				"pl": {
 					"nom": "\u016Bs",
-                    "voc": UNKNOWN,
+                    "voc": "\u016Bs",
 					"loc": UNKNOWN,
                     "gen": "uum",
                     "dat": "ibus",
@@ -196,7 +259,7 @@ const endings = {
 			"f": {
 				"sg": {
 					"nom": "us",
-                    "voc": UNKNOWN,
+                    "voc": "\u016Bs",
 					"loc": UNKNOWN,
                     "gen": "\u016Bs",
                     "dat": "u\u012B",
@@ -205,7 +268,7 @@ const endings = {
 				}, 
 				"pl": {
 					"nom": "\u016Bs",
-                    "voc": UNKNOWN,
+                    "voc": "\u016Bs",
 					"loc": UNKNOWN,
                     "gen": "uum",
                     "dat": "ibus",
@@ -216,7 +279,7 @@ const endings = {
 			"n": {
 				"sg": {
 					"nom": "\u016B",
-					"voc": UNKNOWN,
+					"voc": "\u016B",
 					"loc": UNKNOWN,
 					"gen": "\u016Bs",
 					"dat": "\u016B",
@@ -225,7 +288,7 @@ const endings = {
 				},
 				"pl": {
 					"nom": "ua",
-					"voc": UNKNOWN,
+					"voc": "\u016Ba",
 					"loc": UNKNOWN,
 					"gen": "uum",
 					"dat": "ibus",
@@ -234,11 +297,11 @@ const endings = {
 				}
 			}
 		},
-		{
+		{ // 5th declension
 			"m": {
 				"sg": {
 					"nom": "\u0113s",
-					"voc": UNKNOWN,
+					"voc": "\u0113s",
 					"loc": UNKNOWN,
 					"gen": "\u0113\u012B",
 					"dat": "\u0113\u012B",
@@ -247,7 +310,7 @@ const endings = {
 				},
 				"pl": {
 					"nom": "\u0113s",
-					"voc": UNKNOWN,
+					"voc": "\u0113s",
 					"loc": UNKNOWN,
 					"gen": "\u0113rum",
 					"dat": "\u0113bus",
@@ -258,7 +321,7 @@ const endings = {
 			"f": {
 				"sg": {
 					"nom": "\u0113s",
-					"voc": UNKNOWN,
+					"voc": "\u0113s",
 					"loc": UNKNOWN,
 					"gen": "\u0113\u012B",
 					"dat": "\u0113\u012B",
@@ -267,7 +330,7 @@ const endings = {
 				},
 				"pl": {
 					"nom": "\u0113s",
-					"voc": UNKNOWN,
+					"voc": "\u0113s",
 					"loc": UNKNOWN,
 					"gen": "\u0113rum",
 					"dat": "\u0113bus",
@@ -278,7 +341,7 @@ const endings = {
 			"n": {
 				"sg": {
 					"nom": "\u0113s",
-					"voc": UNKNOWN,
+					"voc": "\u0113s",
 					"loc": UNKNOWN,
 					"gen": "\u0113\u012B",
 					"dat": "\u0113\u012B",
@@ -287,7 +350,7 @@ const endings = {
 				},
 				"pl": {
 					"nom": "\u0113s",
-					"voc": UNKNOWN,
+					"voc": "\u0113s",
 					"loc": UNKNOWN,
 					"gen": "\u0113rum",
 					"dat": "\u0113bus",
@@ -297,44 +360,195 @@ const endings = {
 			}
 		}
     ],
+    /**
+     * NOTE:
+     * The following section for verb endings
+     * is primarily cited from one source:
+     * https://classicalliberalarts.com/classical-trivium/latin-verb-conjugation-chart/
+     * Feel free to include evidence going against/for these endings, it would really help!
+     */
     "v": [
-        null,
-        {
-            "sg": {
-                "imp": "bam",
-                "prs": "\u014D",
-                "prf": "i"
+        null, // 0th conj. (nonexistent)
+        [ // 1st conj.
+            null,
+            { // 1st person
+                "sg": {
+                    "prs": "\u014D", // o-line
+                    "imp": "abam",
+                    "ftr": "abo",
+                    "prf": "avi"
+                },
+                "pl": {
+                    "prs": "amus",
+                    "imp": "abamus",
+                    "ftr": "abimus",
+                    "prf": "avimus"
+                }
             },
-            "pl": {
-                "imp": "bamus",
-                "prs": "mus",
-                "prf": "imus"
-            }
-        },
-        {
-            "sg": {
-                "imp": "bas",
-                "prs": "s",
-                "prf": "isti"
+            { // 2nd person
+                "sg": {
+                    "prs": "as", // o-line
+                    "imp": "abas",
+                    "ftr": "abis",
+                    "prf": "avisti"
+                },
+                "pl": {
+                    "prs": "atis",
+                    "imp": "abatis",
+                    "ftr": "abitis",
+                    "prf": "avistis"
+                }
             },
-            "pl": {
-                "imp": "batis",
-                "prs": "tis",
-                "prf": "istis"
+            { // 3rd person
+                "sg": {
+                    "prs": "at", // o-line
+                    "imp": "abat",
+                    "ftr": "abit",
+                    "prf": "avit"
+                },
+                "pl": {
+                    "prs": "ant",
+                    "imp": "abant",
+                    "ftr": "abunt",
+                    "prf": "erunt"
+                }
             }
-        },
-        {
-            "sg": {
-                "imp": "t",
-                "prs": "bat",
-                "prf": "it"
+        ],
+        [ // 2nd conj.
+            null,
+            { // 1st person
+                "sg": {
+                    "prs": "e\u014D",
+                    "imp": "ebam",
+                    "ftr": "ebo",
+                    "prf": "ui"
+                },
+                "pl": {
+                    "prs": "emus",
+                    "imp": "ebamus",
+                    "ftr": "ebimus",
+                    "prf": "uimus"
+                }
             },
-            "pl": {
-                "imp": "bant",
-                "prs": "nt",
-                "prf": "erunt"
+            { // 2nd person
+                "sg": {
+                    "prs": "es", // o-line
+                    "imp": "ebas",
+                    "ftr": "ebis",
+                    "prf": "uisti"
+                },
+                "pl": {
+                    "prs": "et",
+                    "imp": "ebatis",
+                    "ftr": "ebitis",
+                    "prf": "uistis"
+                }
+            },
+            { // 3rd person
+                "sg": {
+                    "prs": "et",
+                    "imp": "ebat",
+                    "ftr": "ebit",
+                    "prf": "uit"
+                },
+                "pl": {
+                    "prs": "ent",
+                    "imp": "ebant",
+                    "ftr": "ebunt",
+                    "prf": "erunt"
+                }
             }
-        }
+        ],
+        [ // 3rd conj.
+            null,
+            { // 1st person
+                "sg": {
+                    "prs": "\u014D", // o-line
+                    "imp": "ebam",
+                    "ftr": "am",
+                    "prf": "i"
+                },
+                "pl": {
+                    "prs": "imus",
+                    "imp": "ebamus",
+                    "ftr": "emus",
+                    "prf": "imus"
+                }
+            },
+            { // 2nd person
+                "sg": {
+                    "prs": "is",
+                    "imp": "ebas",
+                    "ftr": "es",
+                    "prf": "is"
+                },
+                "pl": {
+                    "prs": "itis",
+                    "imp": "ebatis",
+                    "ftr": "etis",
+                    "prf": "istis"
+                }
+            },
+            { // 3rd person
+                "sg": {
+                    "prs": "it", 
+                    "imp": "ebat",
+                    "ftr": "et",
+                    "prf": "it"
+                },
+                "pl": {
+                    "prs": "unt",
+                    "imp": "bant",
+                    "ftr": "ent",
+                    "prf": "erunt"
+                }
+            }
+        ],
+        [ // 4th conj.
+            null,
+            { // 1st person
+                "sg": {
+                    "prs": "\u014D", // o-line
+                    "imp": "ebam",
+                    "ftr": "am",
+                    "prf": "vi"
+                },
+                "pl": {
+                    "prs": "mus",
+                    "imp": "ebamus",
+                    "ftr": "emus",
+                    "prf": "vimus"
+                }
+            },
+            { // 2nd person
+                "sg": {
+                    "prs": "s",
+                    "imp": "ebas",
+                    "ftr": "es",
+                    "prf": "vis"
+                },
+                "pl": {
+                    "prs": "tis",
+                    "imp": "ebatis",
+                    "ftr": "etis",
+                    "prf": "stis"
+                }
+            },
+            { // 3rd person
+                "sg": {
+                    "prs": "t", 
+                    "imp": "ebat",
+                    "ftr": "et",
+                    "prf": "vit"
+                },
+                "pl": {
+                    "prs": "unt",
+                    "imp": "ebant",
+                    "ftr": "ent",
+                    "prf": "verunt"
+                }
+            }
+        ]
     ],
     "a": [
         null,
@@ -490,36 +704,165 @@ const endings = {
         }
     ],
     "rp": {
-        "nom": {
+        "m": {
             "sg": {
-                "m": "qu\u012B",
-                "f": "quae",
-                "n": "quod"
+                "nom": "qu\u012B",
+                "gen": "c\u00FBius",
+                "dat": "cui",
+                "acc": "quem",
+                "abl": "qu\u014D"
             },
             "pl": {
-                "m": "quem",
-                "f": "quam",
-                "n": "quod"
+                "nom": "qu\u012B",
+                "gen": "qu\u014Drum",
+                "dat": "quibus",
+                "acc": "qu\u014Ds",
+                "abl": "quibus"
             }
-            
         },
-        "acc": {
+        "f": {
             "sg": {
-                "m": "qu\u012B",
-                "f": "quae",
-                "n": "quae"
+                "nom": "quae",
+                "gen": "c\u00FBius",
+                "dat": "cui",
+                "acc": "quam",
+                "abl": "qu\u0101"
             },
             "pl": {
-                "m": "qu\u014Ds",
-                "f": "qu\u0101s",
-                "n": "quae"
+                "nom": "quae",
+                "gen": "qu\u0101rum",
+                "dat": "quibus",
+                "acc": "qu\u0101s",
+                "abl": "quibus"
+            }
+        },
+        "n": {
+            "sg": {
+                "nom": "quod",
+                "gen": "c\u00FBius",
+                "dat": "cui",
+                "acc": "quod",
+                "abl": "qu\u014D"
+            },
+            "pl": {
+                "nom": "quae",
+                "gen": "qu\u014Drum",
+                "dat": "quibus",
+                "acc": "quae",
+                "abl": "quibus"
             }
         }
     }
 };
-const LEDB = {
-	"endings": endings,
-	"any": ANY,
-	"unknown": UNKNOWN,
-	"impossible": IMPOSSIBLE
+
+const normalized = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove diacritics (e.g. long marks or hats)
+const compacted = { // compacts all the endings into a single layer object
+    "n": Object.assign({}, ...([1,2,3,4,5].map(d => 
+        ["m","f","n"].map(g => // gender (g)
+            ["sg", "pl"].map(n => // number (n)
+                ["nom", "voc", "gen", "dat", "acc", "abl"].map(c => { // case (c)
+                    let obj = {}; 
+                    obj[`n,${d}:${g}.${n}.${c}`] = normalized(endings.n[d][g][n][c]); // n,<declension>:<gender>.<number>.<case>
+                    return obj;
+                })
+            )
+        )
+    ).flat(Infinity))),
+    "v": Object.assign({}, ...([1,2,3,4].map(d => // conjugations
+        [1,2,3].map(p => // person (p)
+            ["sg", "pl"].map(n => // number (n)
+                ["prs", "imp", "ftr", "prf"].map(c => { // case (or in this case, tense) (c)
+                    let obj = {};
+                    obj[`v,${d}:${p}.${n}.${c}`] = normalized(endings.v[d][p][n][c]); // v,<declension>:<person>.<number>.<tense>
+                    return obj;
+                })
+            )
+        )
+    ).flat(Infinity))),
+    "a": Object.assign({}, ...([1,2,3].map(d => // declension (d)
+        ["m","f","n"].map(g => // gender (g)
+            ["sg", "pl"].map(n => // number (n)
+                ["nom", "gen", "dat", "acc", "abl"].map(c => { // case (c)
+                    let obj = {};
+                    obj[`a,${d}:${g}.${n}.${c}`] = normalized(endings.a[d][g][n][c]); // a,<declension>:<gender>.<number>.<case>
+                    return obj;
+                })
+            )
+        )
+    ).flat(Infinity))),
+    "rp": Object.assign({}, ...(["m","f","n"].map(g => ( // gender (g)
+        ["sg", "pl"].map(n => // number (n)
+            ["nom", "gen", "dat", "acc", "abl"].map(c => { // case (c)
+                let obj = {};
+                obj[`rp,${g}:${n}.${c}`] = normalized(endings.rp[g][n][c]); // rp,<gender>:<number>.<case>
+                return obj;
+            })
+        )
+    )).flat(Infinity))),
 };
+/* General method to flatten all of the endings to make searching easier, scrapped because it doesn't work and unnecessary
+const removeDiacritics = e => e.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const allAreOfType = (li, typeClass) => {
+    return removeNulls(li)[0] instanceof typeClass;
+};
+const anyAreOfType = (li, typeClass) => {
+    if(li instanceof Array) return li.filter(e => e instanceof typeClass).length != 0; 
+    if(li.constructor == Object) return Object.keys(li).filter(e => li[e] instanceof typeClass).length != 0; 
+};
+const removeNulls = (li) => { 
+    if(li instanceof Array) return li.filter(e => e != null);
+    if(li.constructor == Object) return Object.keys(li).filter(e => li[e] != null && li[e] != undefined).map(e => li[e]);
+};
+const flattenAllArrays = v => {
+    if(v instanceof Array) return v.map(e => e instanceof Array ? e.flat(Infinity) : e).flat(Infinity);
+    if(v.constructor == Object) return Object.keys(v).map(e => v[e] instanceof Array ? v[e].flat(Infinity) : v[e]);
+};
+function _flatten(data,labelToAdd,f=removeDiacritics) {
+    data=removeNulls(data);
+    console.log(data, data.constructor == Object);
+    if(data.constructor == Object) {
+        if(!(allAreOfType(data, Array) || allAreOfType(data,Object))) return Object.assign(
+            {}, 
+            ...(
+                Object.keys(data).map(e => {
+                    let obj = {};
+                    obj[`${labelToAdd==undefined ? "" : labelToAdd}${labelToAdd==undefined ? "" : "."}${e}`] = f(data[e]);
+                    return obj;
+                })
+            )
+        );
+        return Object.keys(data).map(e => _flatten(data[e],e,f));
+    }
+    if(data instanceof Array) {
+        if(!(allAreOfType(data, Array) || allAreOfType(data,Object))) return Object.assign(
+            {}, 
+            ...(
+                data.map((e,i) => {
+                    let obj = {};
+                    obj[`${labelToAdd==undefined ? "" : labelToAdd}${labelToAdd==undefined ? "" : "."}${i}`] = f(e);
+                    return obj;
+                })
+            )
+        );
+        return data.map((e,i) => _flatten(e,i,f));
+    }
+    
+    return {[labelToAdd]: data};
+}
+const flatten = (data,labelToAdd,f=removeDiacritics) => (Object.assign({}, ..._flatten(data,labelToAdd,f)));
+try {
+    console.log(JSON.stringify(flatten(endings)));
+} catch(e) {
+    console.log(e);
+}*/
+const LEDB = { // publically-accessible spot to do all things LEDB
+	"endings": endings, // ALL of the endings
+	"flattened": compacted, // single-layer object with all the endings mapped to a path,
+	"sources": SOURCES_USED, // references used to get all the endings
+	"any": ANY, // the marker for a wildcard ending, one that doesn't have a common pattern or it has multiple options. Defaults to * (asterisk)
+	"unknown": UNKNOWN, // not stored in the database and devs couldn't find any reputable source that says a discernable ending. Defaults to ? (question mark)
+	"impossible": IMPOSSIBLE // never happens in Latin, e.g. noun 1st declension neuter (n,1:f.*). Defaults to ☒ (U+2612, ballot box with x)
+};
+function findEnding(ending, type="n") { // find an ending via LEDB.flattened, input an ending and the category (noun="n", adjective="a", etc.) and it will find all of the endings that match without diacritics
+    return (Object.entries(compacted[type]).filter(([, val]) => val === ending)).map(e => e[0]);
+}
