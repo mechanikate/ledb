@@ -18,11 +18,14 @@
     The <i>website</i> for LEDB (which you're on right now) has a ending picker below where you can plug in the aspects of the ending you're looking for (e.g. gender, number, case, and declension) and get the resulting ending out.<br />
     The actual database itself can be found <a href="https://matthy.dev/ledb.js">here</a>, and is encoded in JSON within JavaScript, to allow missing/impossible endings to be indicated and have customized appearances (by default, unknown endings/endings missing in the database will mark as a "?", "any" endings will be marked as a "*", and impossible endings with a "&#9746;". 
         Also note that Unicode letters or letters with lines above them like &#x0101, &#x0113, &#x012b, &#x014d, or &#x016b are encoded with Unicode escape sequences in the database itself, as \u0101, \u0113, \u012b, \u014d, or \u016b respectively.
-    
 </p>
 <hr />
 <script src="ledb.js"></script>
 <script>
+window.onerror = (e,url,lineno) => {
+  alert(e,url,lineno);
+  return true;
+};
 const longFormsClass = {
     "n": "noun",
     "v": "verb",
@@ -30,8 +33,12 @@ const longFormsClass = {
     "rp": "relativePronoun"
 };
 function updateDisables(choice = "n") {
-    [...document.getElementsByClassName(longFormsClass[choice])].forEach(e => e.removeAttribute("disabled"));
-    Object.keys(longFormsClass).filter(e => e !== choice).map(e => longFormsClass[e]).forEach(pos =>  [...document.getElementsByClassName(pos)].forEach(e => e.setAttribute("disabled","")))
+    [...document.getElementsByClassName(longFormsClass[choice])]
+        .forEach(e => e.removeAttribute("disabled"));
+    Object.keys(longFormsClass)
+        .filter(e => e !== choice)
+        .map(e => longFormsClass[e])
+        .forEach(pos => [...document.getElementsByClassName(pos)].forEach(e => e.setAttribute("disabled","")))
 }
 function getSelection() {
     let base = endings[partOfSpeech.value];
@@ -41,17 +48,59 @@ function getSelection() {
             return answer.innerHTML = base[nounDeclension.value][nounGender.value][nounCount.value][nounCase.value];
         case "v":  
             endingToggle.innerHTML = "ENDING: -";
-            return answer.innerHTML = base[verbDeclension.value][verbCount.value][verbCase.value];
+            return answer.innerHTML = base[verbConjugation.value][verbPerson.value][verbCount.value][verbCase.value];
         case "a":  
             endingToggle.innerHTML = "ENDING: -";
             return answer.innerHTML = base[adjectiveDeclension.value][adjectiveGender.value][adjectiveCount.value][adjectiveCase.value];
         case "rp":
             endingToggle.innerHTML = "RELATIVE PRONOUN: ";
-            return answer.innerHTML = base[relativePronounCase.value][relativePronounCount.value][relativePronounGender.value];
+            return answer.innerHTML = base[relativePronounGender.value][relativePronounCount.value][relativePronounCase.value];
     }
 }
+function setWhich(txt) {
+    try{
+    const parts = txt.split(":");
+    const posp = parts[0].split(",")[0];
+    partOfSpeech.value = posp;
+    switch(posp) {
+        case "n":  
+            nounDeclension.value = parts[0].split(",")[1];
+            nounGender.value = parts[1].split(".")[0];
+            nounCount.value = parts[1].split(".")[1];
+            nounCase.value = parts[1].split(".")[2];
+            return getSelection();
+        case "v":  
+            verbConjugation.value = parts[0].split(",")[1];
+            verbPerson.value = parts[1].split(".")[0];
+            verbCount.value = parts[1].split(".")[1];
+            verbCase.value = parts[1].split(".")[2];
+            return getSelection();
+        case "a":  
+            adjectiveDeclension.value = parts[0].split(",")[1];
+            adjectiveGender.value = parts[1].split(".")[0];
+            adjectiveCount.value = parts[1].split(".")[1];
+            adjectiveCase.value = parts[1].split(".")[2];
+            return getSelection();
+        case "rp":
+            relativePronounGender.value = parts[0].split(",")[1];
+            relativePronounCount.value = parts[1].split(".")[0];
+            relativePronounCase.value = parts[1].split(".")[1];
+            return getSelection();
+    }
+    }catch(e){alert(e)}
+}
+function makeOptbar(arr) {
+    optBar.innerHTML = "";
+    arr.forEach(e => {
+        let optEle = document.createElement("option");
+        optEle.setAttribute("value", e);
+        const formatted = e.split(":")[0].split(",")[1]+", "+e.split(":")[1];
+        optEle.innerHTML = formatted;
+        optBar.appendChild(optEle);
+    });
+}
 window.onload = () => {
-    [...document.querySelectorAll(".noun, .verb, .adjective, .relativePronoun")].forEach(e => e.addEventListener("change", getSelection));
+    [...document.querySelectorAll("#partOfSpeech, .noun, .verb, .adjective, .relativePronoun")].forEach(e => e.addEventListener("change", getSelection));
     [...document.querySelectorAll(".verb, .adjective, .relativePronoun")].forEach(e => e.setAttribute("disabled",""));
 };
 </script>
@@ -59,6 +108,7 @@ window.onload = () => {
 <h3 id="endingpicker-usage">Usage</h3>
 <p>To use the ending picker, select the part of speech you're looking for and then set the dropdowns accordingly to look for the ending.
     For example, if you have "<abbr title="brother, sibling">frater, fratis, m.</abbr>" you'd look for 3rd declension masculine nouns. </p>
+<b id="endingToggle">ENDING: -</b><b id="answer">a</b> <br />
 <label for="partofspeech">Part of Speech</label>
 <select name="partofspeech" id="partOfSpeech" onchange="updateDisables(this.value);">
     <option value="n">Noun</option>
@@ -93,7 +143,13 @@ window.onload = () => {
     </select>
 </div>
 <div id="verbOptions" class="verb">
-    <select name="verbDeclension" id="verbDeclension" class="verb">
+    <select name="verbConjugation" id="verbConjugation" class="verb">
+        <option value=1>1st</option>
+        <option value=2>2nd</option>
+        <option value=3>3rd</option>
+        <option value=4>4th</option>
+    </select>
+    <select name="verbPerson" id="verbPerson" class="verb">
         <option value=1>1st</option>
         <option value=2>2nd</option>
         <option value=3>3rd</option>
@@ -131,20 +187,31 @@ window.onload = () => {
     </select>
 </div>
 <div id="relativePronounOptions" class="relativePronoun">
-    <select name="relativePronounCase" id="relativePronounCase" class="relativePronoun">
-        <option value="nom">Nominative</option>
-        <option value="acc">Accusative</option>
-    </select>
-    <select name="relativePronounCount" id="relativePronounCount" class="relativePronoun">
-        <option value="sg">Singular</option>
-        <option value="pl">Plural</option>
-    </select>
     <select name="relativePronounGender" id="relativePronounGender" class="relativePronoun">
         <option value="m">Masculine</option>
         <option value="f">Feminine</option>
         <option value="n">Neuter</option>
     </select>
+    <select name="relativePronounCount" id="relativePronounCount" class="relativePronoun">
+        <option value="sg">Singular</option>
+        <option value="pl">Plural</option>
+    </select>
+    <select name="relativePronounCase" id="relativePronounCase" class="relativePronoun">
+        <option value="nom">Nominative</option>
+        <option value="gen">Genitive</option>
+        <option value="dat">Dative</option>
+        <option value="acc">Accusative</option>
+        <option value="abl">Ablative</option>
+    </select>
+    
 </div>
-<span id="endingToggle">ENDING: -</span><span id="answer">a</span>
+<br />
+<h2 id="endingpicker">Ending Searcher</h2>
+<h3 id="endingpicker-usage">Usage</h3>
+<p>To use the Ending Searcher, first select a part of speech (e.g. relative pronoun) in the Ending Picker. Then, you can search through the endings by typing the ending out (e.g. <abbr title="Nominative sg/pl neuter of qui/quae/quod (who, which)">"quod"</abbr>). It will then show all the possible results in the dropdown below the bar (e.g. nom, sg.n and nom, pl.n). You can then click the dropdown option(s) to select the ending and autofill the Ending Picker.</p>
+<input type="text" style="width: 25%;" placeholder="Ending Search, make sure to set part of speech" id="endingsearch" /><button onclick="if(findEnding(endingsearch.value,partOfSpeech.value).length === 1) { setWhich(findEnding(endingsearch.value,partOfSpeech.value)[0]); } makeOptbar(findEnding(endingsearch.value,partOfSpeech.value));">Search</button><br />
+<b>RESULTS: <select name="optbar" id="optBar" class="search" onchange="setWhich(this.value);">
+    <option>N/A</option>
+</select></b>
 </body>
 </html>
