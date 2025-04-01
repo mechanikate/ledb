@@ -752,7 +752,109 @@ const endings = {
                 "abl": "quibus"
             }
         }
-    }
+    },
+	"dp": { // demonstrative pronouns
+		"hic": { // hic, haec, hoc
+			"m": {
+				"sg": {
+					"nom": "hic",
+					"gen": "huius",
+					"dat": "huic",
+					"acc": "hunc",
+					"abl": "h\u014Dc"
+				},
+				"pl": {
+					"nom": "h\u012B",
+					"gen": "h\u014Drum",
+					"dat": "h\u012Bs",
+					"acc": "h\u014Ds",
+					"abl": "h\u012Bs"
+				}
+			},
+			"f": {
+				"sg": {
+					"nom": "haec",
+					"gen": "huius",
+					"dat": "huic",
+					"acc": "hanc",
+					"abl": "h\u0101c"
+				},
+				"pl": {
+					"nom": "hae",
+					"gen": "h\u0101rum",
+					"dat": "h\u012Bs",
+					"acc": "h\u0101s",
+					"abl": "h\u012Bs"
+				}
+			},
+			"n": {
+				"sg": {
+					"nom": "hoc",
+					"gen": "huius",
+					"dat": "huic",
+					"acc": "hoc",
+					"abl": "h\u014Dc"
+				},
+				"pl": {
+					"nom": "haec",
+					"gen": "h\u014Drum",
+					"dat": "h\u012Bs",
+					"acc": "haec",
+					"abl": "h\u012Bs"
+				}
+			}
+		},
+		"ille": { // ille, illa, illud
+			"m": {
+				"sg": {
+					"nom": "ille",
+					"gen": "ill\u012Bus",
+					"dat": "ill\u012B",
+					"acc": "illum",
+					"abl": "ill\u014D"
+				},
+				"pl": {
+					"nom": "ill\u012B",
+					"gen": "ill\u014Drum",
+					"dat": "ill\u012Bs",
+					"acc": "ill\u014Ds",
+					"abl": "ill\u012Bs"
+				}
+			},
+			"f": {
+				"sg": {
+					"nom": "illa",
+					"gen": "ill\u012Bus",
+					"dat": "ill\u012B",
+					"acc": "illam",
+					"abl": "ill\u0101"
+				},
+				"pl": {
+					"nom": "illae",
+					"gen": "ill\u0101rum",
+					"dat": "ill\u012Bs",
+					"acc": "ill\u0101s",
+					"abl": "il\u012Bs"
+				}
+			},
+			"n": {
+				"sg": {
+					"nom": "illud",
+					"gen": "ill\u012Bus",
+					"dat": "ill\u012B",
+					"acc": "illud",
+					"abl": "ill\u014D"
+				},
+				"pl": {
+					"nom": "illa",
+					"gen": "ill\u014Drum",
+					"dat": "ill\u012Bs",
+					"acc": "illa",
+					"abl": "ill\u012Bs"
+				}
+			}
+		}
+	}
 };
 
 const normalized = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove diacritics (e.g. long marks or hats)
