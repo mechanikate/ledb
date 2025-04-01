@@ -56,6 +56,14 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/lessons/lesson-7-third-declension-nouns-and-adjectives/",
 			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject3.PDF"
 		]
+	},
+	{
+		"where": [
+			"dp.*"
+		],
+		"urls": [
+			"https://www.thelatinlibrary.com/101/DemonstrativePronouns.pdf"
+		]
 	}
 ];
 const endings = {
@@ -901,6 +909,17 @@ const compacted = { // compacts all the endings into a single layer object
             })
         )
     )).flat(Infinity))),
+	"dp": Object.assign({}, ...(["hic","ille"].map(d => // type of dp (d)
+        ["m","f","n"].map(g => // gender (g)
+            ["sg", "pl"].map(n => // number (n)
+                ["nom", "gen", "dat", "acc", "abl"].map(c => { // case (c)
+                    let obj = {};
+                    obj[`dp,${d}:${g}.${n}.${c}`] = normalized(endings.dp[d][g][n][c]); // a,<declension>:<gender>.<number>.<case>
+                    return obj;
+                })
+            )
+        )
+    ).flat(Infinity))),
 };
 /* General method to flatten all of the endings to make searching easier, scrapped because it doesn't work and unnecessary
 const removeDiacritics = e => e.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
