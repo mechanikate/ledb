@@ -8,7 +8,8 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
         ],
         "urls": [
             "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions",
-			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/resources/stage-1-latin-grammar-resource/nouns/"
+			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/resources/stage-1-latin-grammar-resource/nouns/",
+			"https://ridgelightranch.com/wp-content/uploads/2023/04/Latin-Nouns-and-Pronouns-Chart-by-Julie-v3.pdf"
         ]
     },
 	{
@@ -33,7 +34,9 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
             "rp.*"
         ],
         "urls": [
-            "https://dcc.dickinson.edu/grammar/latin/relative-interrogative-and-indefinite-pronouns"
+            "https://dcc.dickinson.edu/grammar/latin/relative-interrogative-and-indefinite-pronouns",
+			"https://thelatinlibrary.com/101/RelativePronouns.pdf",
+			"https://ridgelightranch.com/wp-content/uploads/2023/04/Latin-Nouns-and-Pronouns-Chart-by-Julie-v3.pdf"
         ]
     },
 	{
@@ -44,7 +47,8 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 		"urls": [
 			"https://dcc.dickinson.edu/grammar/latin/1st-and-2nd-declension-adjectives-%C4%81-o-stems",
 			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/lessons/lesson-5-first-and-second-declension-adjectives-ego-and-nos/",
-			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject12.PDF"
+			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject12.PDF",
+			"https://ridgelightranch.com/wp-content/uploads/2023/04/Latin-Nouns-and-Pronouns-Chart-by-Julie-v3.pdf"
 		]
 	},
 	{
@@ -54,7 +58,8 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 		"urls": [
 			"https://dcc.dickinson.edu/grammar/latin/3rd-declension-adjectives-classification-and-paradigms",
 			"https://www.nationalarchives.gov.uk/latin/stage-1-latin/lessons/lesson-7-third-declension-nouns-and-adjectives/",
-			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject3.PDF"
+			"https://www.usu.edu/markdamen/Latin1000/Vocsheet/adject3.PDF",
+			"https://ridgelightranch.com/wp-content/uploads/2023/04/Latin-Nouns-and-Pronouns-Chart-by-Julie-v3.pdf"
 		]
 	},
 	{
@@ -62,7 +67,9 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 			"dp.*"
 		],
 		"urls": [
-			"https://www.thelatinlibrary.com/101/DemonstrativePronouns.pdf"
+			"https://www.thelatinlibrary.com/101/DemonstrativePronouns.pdf",
+			"https://dcc.dickinson.edu/grammar/latin/demonstrative-pronouns-paradigms",
+			"https://ridgelightranch.com/wp-content/uploads/2023/04/Latin-Nouns-and-Pronouns-Chart-by-Julie-v3.pdf"
 		]
 	}
 ];
