@@ -13,7 +13,8 @@
         <li>Nouns</li>
         <li>Verbs</li>
         <li>Adjectives</li>
-        <li>Relative pronouns</li>
+        <li>Relative pronouns (qui, quae, quod)</li>
+        <lI>Demonstrative pronouns (hic, haec, hoc/ille, illa, illud)</lI>
     </ul>
     The <i>website</i> for LEDB (which you're on right now) has a ending picker below where you can plug in the aspects of the ending you're looking for (e.g. gender, number, case, and declension) and get the resulting ending out.<br />
     The actual database itself can be found <a href="https://matthy.dev/ledb.js">here</a>, and is encoded in JSON within JavaScript, to allow missing/impossible endings to be indicated and have customized appearances (by default, unknown endings/endings missing in the database will mark as a "?", "any" endings will be marked as a "*", and impossible endings with a "&#9746;". 
@@ -22,18 +23,18 @@
 <hr />
 <script src="ledb.js"></script>
 <script>
-window.onerror = (e,url,lineno) => {
+window.onerror = (e,url,lineno) => { // backup if something bad happens
   alert(e,url,lineno);
   return true;
 };
-const longFormsClass = {
+const longFormsClass = { // dict to map shortform to longform names
     "n": "noun",
     "v": "verb",
     "a": "adjective",
     "rp": "relativePronoun",
     "dp": "demonstrativePronoun"
 };
-function updateDisables(choice = "n") {
+function updateDisables(choice = "n") { // update disabled dropdowns to disable non-used ones (e.g. adjective dropdowns when Noun part of speech is selected)
     [...document.getElementsByClassName(longFormsClass[choice])]
         .forEach(e => e.removeAttribute("disabled"));
     Object.keys(longFormsClass)
@@ -41,7 +42,7 @@ function updateDisables(choice = "n") {
         .map(e => longFormsClass[e])
         .forEach(pos => [...document.getElementsByClassName(pos)].forEach(e => e.setAttribute("disabled","")))
 }
-function getSelection() {
+function getSelection() { // set the ending when you pick one from the dropdowns
     let base = endings[partOfSpeech.value];
     switch(partOfSpeech.value) {
         case "n":  
@@ -61,7 +62,7 @@ function getSelection() {
             return answer.innerHTML = base[demonstrativePronounDistance.value][demonstrativePronounGender.value][demonstrativePronounCount.value][demonstrativePronounCase.value];
     }
 }
-function setWhich(txt) {
+function setWhich(txt) { // set the sliders when you click a dropdown option after searching
     try{
     const parts = txt.split(":");
     const posp = parts[0].split(",")[0];
@@ -98,7 +99,7 @@ function setWhich(txt) {
     }
     }catch(e){alert(e)}
 }
-function makeOptbar(arr) {
+function makeOptbar(arr) { // make the option bar after running the search. Kind of esoteric format, hopefully this can be updated soon
     optBar.innerHTML = "";
     arr.forEach(e => {
         let optEle = document.createElement("option");
@@ -109,9 +110,15 @@ function makeOptbar(arr) {
     });
 }
 window.onload = () => {
-    [...document.querySelectorAll("#partOfSpeech, .noun, .verb, .adjective, .relativePronoun, .demonstrativePronoun")].forEach(e => e.addEventListener("change", getSelection));
-    [...document.querySelectorAll(".verb, .adjective, .relativePronoun, .demonstrativePronoun")].forEach(e => e.setAttribute("disabled",""));
+    [...document.querySelectorAll("#partOfSpeech, .noun, .verb, .adjective, .relativePronoun, .demonstrativePronoun")].forEach(e => e.addEventListener("change", getSelection)); // when you change the part of speech dropdown, disable all the other dropdowns below the other parts of speech
+    [...document.querySelectorAll(".verb, .adjective, .relativePronoun, .demonstrativePronoun")].forEach(e => e.setAttribute("disabled","")); // disable every other input than noun by default since noun is selected by default
+    document.getElementById("endingsearch").addEventListener("keypress", (evt) => { // TL;DR: when the Enter key is pressed, run the search
+        if(evt.key != "Enter") return true; // if the key isn't Enter, carry on as normal
+        evt.preventDefault(); // if it is Enter, prevent doing the default...
+        document.getElementById("endingsearchButton").click(); // ...and run the search if pressing enter 
+    });
 };
+
 </script>
 <h2 id="endingpicker">Ending Picker</h2>
 <h3 id="endingpicker-usage">Usage</h3>
@@ -240,7 +247,7 @@ window.onload = () => {
 <h2 id="endingpicker">Ending Searcher</h2>
 <h3 id="endingpicker-usage">Usage</h3>
 <p>To use the Ending Searcher, first select a part of speech (e.g. relative pronoun) in the Ending Picker. Then, you can search through the endings by typing the ending out (e.g. <abbr title="Nominative sg/pl neuter of qui/quae/quod (who, which)">"quod"</abbr>). It will then show all the possible results in the dropdown below the bar (e.g. nom, sg.n and nom, pl.n). You can then click the dropdown option(s) to select the ending and autofill the Ending Picker.</p>
-<input type="text" style="width: 25%;" placeholder="Ending Search, make sure to set part of speech" id="endingsearch" /><button onclick="if(findEnding(endingsearch.value,partOfSpeech.value).length === 1) { setWhich(findEnding(endingsearch.value,partOfSpeech.value)[0]); } makeOptbar(findEnding(endingsearch.value,partOfSpeech.value));">Search</button><br />
+<input type="text" style="width: 25%;" placeholder="Ending Search, make sure to set part of speech" id="endingsearch" /><button id="endingsearchButton" onclick="if(findEnding(endingsearch.value,partOfSpeech.value).length === 1) { setWhich(findEnding(endingsearch.value,partOfSpeech.value)[0]); } makeOptbar(findEnding(endingsearch.value,partOfSpeech.value));">Search</button><br />
 <b>RESULTS: <select name="optbar" id="optBar" class="search" onchange="setWhich(this.value);">
     <option>N/A</option>
 </select></b>
