@@ -96,6 +96,7 @@ function setWhich(txt) { // set the sliders when you click a dropdown option aft
             demonstrativePronounGender.value = parts[1].split(".")[0];
             demonstrativePronounCount.value = parts[1].split(".")[1];
             demonstrativePronounCase.value = parts[1].split(".")[2];
+            return getSelection();
     }
     }catch(e){alert(e)}
 }
