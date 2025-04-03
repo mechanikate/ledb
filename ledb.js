@@ -992,5 +992,9 @@ const LEDB = { // publically-accessible spot to do all things LEDB
 	"impossible": IMPOSSIBLE // never happens in Latin, e.g. noun 1st declension neuter (n,1:f.*). Defaults to ☒ (U+2612, ballot box with x)
 };
 function findEnding(ending, type="n") { // find an ending via LEDB.flattened, input an ending and the category (noun="n", adjective="a", etc.) and it will find all of the endings that match without diacritics
-    return (Object.entries(compacted[type]).filter(([, val]) => val === ending)).map(e => e[0]);
+    return (Object.entries(compacted[type]).filter(([, val]) => matchRule(val, ending)).map(e => e[0]);
+}
+function matchRule(str, rule) { // e.g. use * as any-length wildcard for text replace, e.g. a*c will match abc, abbbc, but not abcd
+	var escapeRegex = (str) => str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"); // sanitize regex chars
+	return new RegExp("^" + rule.split("*").map(escapeRegex).join(".*") + "$").test(str);
 }
