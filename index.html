@@ -30,7 +30,8 @@ const longFormsClass = {
     "n": "noun",
     "v": "verb",
     "a": "adjective",
-    "rp": "relativePronoun"
+    "rp": "relativePronoun",
+    "dp": "demonstrativePronoun"
 };
 function updateDisables(choice = "n") {
     [...document.getElementsByClassName(longFormsClass[choice])]
@@ -55,6 +56,9 @@ function getSelection() {
         case "rp":
             endingToggle.innerHTML = "RELATIVE PRONOUN: ";
             return answer.innerHTML = base[relativePronounGender.value][relativePronounCount.value][relativePronounCase.value];
+        case "rp":
+            endingToggle.innerHTML = "DEMONSTRATIVE PRONOUN: ";
+            return answer.innerHTML = base[demonstrativePronounDistance.value][demonstrativePronounGender.value][demonstrativePronounCount.value][demonstrativePronounCase.value];
     }
 }
 function setWhich(txt) {
@@ -86,6 +90,11 @@ function setWhich(txt) {
             relativePronounCount.value = parts[1].split(".")[0];
             relativePronounCase.value = parts[1].split(".")[1];
             return getSelection();
+        case "dp":
+            demonstrativePronounDistance.value = parts[0].split(",")[1];
+            demonstrativePronounGender.value = parts[1].split(".")[0];
+            demonstrativePronounCount.value = parts[1].split(".")[1];
+            demonstrativePronounCase.value = parts[1].split(".")[2];
     }
     }catch(e){alert(e)}
 }
@@ -100,8 +109,8 @@ function makeOptbar(arr) {
     });
 }
 window.onload = () => {
-    [...document.querySelectorAll("#partOfSpeech, .noun, .verb, .adjective, .relativePronoun")].forEach(e => e.addEventListener("change", getSelection));
-    [...document.querySelectorAll(".verb, .adjective, .relativePronoun")].forEach(e => e.setAttribute("disabled",""));
+    [...document.querySelectorAll("#partOfSpeech, .noun, .verb, .adjective, .relativePronoun, .demonstrativePronoun")].forEach(e => e.addEventListener("change", getSelection));
+    [...document.querySelectorAll(".verb, .adjective, .relativePronoun, .demonstrativePronoun")].forEach(e => e.setAttribute("disabled",""));
 };
 </script>
 <h2 id="endingpicker">Ending Picker</h2>
@@ -115,6 +124,7 @@ window.onload = () => {
     <option value="v">Verb</option>
     <option value="a">Adjective</option>
     <option value="rp">Relative Pronoun</option>
+    <option value="dp">Demonstrative Pronoun</option>
 </select>
 <div id="nounOptions" class="noun">
     <select name="nounDeclension" id="nounDeclension" class="noun">
@@ -203,7 +213,28 @@ window.onload = () => {
         <option value="acc">Accusative</option>
         <option value="abl">Ablative</option>
     </select>
-    
+</div>
+<div id="demonstrativePronounOptions" class="demonstrativePronoun">
+    <select name="demonstrativePronounDistance" id="demonstrativePronounDistance" class="demonstrativePronoun">
+        <option value="hic">Near (hic)</option>
+        <option value="ille">Distant (ille)</option>
+    </select>
+    <select name="demonstrativePronounGender" id="demonstrativePronounGender" class="demonstrativePronoun">
+        <option value="m">Masculine</option>
+        <option value="f">Feminine</option>
+        <option value="n">Neuter</option>
+    </select>
+    <select name="demonstrativePronounCount" id="demonstrativePronounCount" class="demonstrativePronoun">
+        <option value="sg">Singular</option>
+        <option value="pl">Plural</option>
+    </select>
+    <select name="demonstrativePronounCase" id="demonstrativePronounCase" class="demonstrativePronoun">
+        <option value="nom">Nominative</option>
+        <option value="gen">Genitive</option>
+        <option value="dat">Dative</option>
+        <option value="acc">Accusative</option>
+        <option value="abl">Ablative</option>
+    </select>
 </div>
 <br />
 <h2 id="endingpicker">Ending Searcher</h2>
