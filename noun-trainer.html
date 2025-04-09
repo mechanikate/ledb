@@ -1,0 +1,61 @@
+<script src="ledb.js"></script>
+<script>
+window.onerror = e => alert(e);
+const allEndingValues = Object.values(compacted.n);
+const allEndingKeys = Object.keys(compacted.n);
+let allowedDeclensions = [1,2,3];
+let endingKeys = allEndingKeys.filter(e => allowedDeclensions.includes(parseInt(e.split(",")[1].split(":")[0]))); 
+let endingValues = endingKeys.map(e => compacted.n[e]);
+let currentIndex, currentEnding, spots;
+function pickOne() {
+	currentIndex = Math.floor(Math.random()*endingValues.length);
+	currentEnding = endingValues[currentIndex];
+	spots = findEnding(currentEnding).map(e => [parseInt(e.split(",")[1].split(":")[0]), ...([0,1,2].map(x => e.split(":")[1].split(".")[x]))]);
+    if([ANY,UNKNOWN,IMPOSSIBLE].includes(currentEnding)) pickOne();
+    endingDisplay.innerHTML = currentEnding;
+    isCorrect.innerHTML = "unsure";
+}
+function check(d,g,n,c) {
+	let success = spots.filter(e => JSON.stringify(e) == JSON.stringify([d,g,n,c])).length > 0;
+    if(success) {
+    	isCorrect.innerHTML = "correct";
+        window.setTimeout(pickOne,1500);
+    } else {
+    	isCorrect.innerHTML = "incorrect";
+    	window.setTimeout(() => isCorrect.innerHTML = "unsure", 1500);
+    }
+}
+window.onload = () => {
+	pickOne();
+}
+</script>
+Declensions:
+<br />
+The ending is -<span id="endingDisplay" style="font-weight: 900;"></span>.
+Where is one spot where this ending can be found? <br />
+<select name="declension" id="declensionSelect">
+	<option value=1>1st declension</option>
+    <option value=2>2nd declension</option>
+    <option value=3>3rd declension</option>
+    <option value=4>4th declension</option>
+    <option value=5>5th declension</option>
+</select><br />
+<select name="gender" id="genderSelect">
+	<option value="m">Masculine</option>
+    <option value="f">Feminine</option>
+    <option value="n">Neuter</option>
+</select><br />
+<select name="number" id="numberSelect">
+	<option value="sg">Singular</option>
+    <option value="pl">Plural</option>
+</select><br />
+<select name="case" id="caseSelect">
+	<option value="nom">Nominative</option>
+    <option value="gen">Genitive</option>
+    <option value="dat">Dative</option>
+    <option value="acc">Accusative</option>
+    <option value="abl">ablative</option>
+    <option value="voc">Vocative</option>
+</select><br />
+<button onclick="check(JSON.parse(declensionSelect.value), genderSelect.value, numberSelect.value, caseSelect.value);">Check</button><br />
+You are <span id="isCorrect" style="font-weight: 900;">undecided</span>.
