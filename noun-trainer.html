@@ -1,9 +1,8 @@
-<script src="ledb.js"></script>
 <script>
 window.onerror = e => alert(e);
 const allEndingValues = Object.values(compacted.n);
 const allEndingKeys = Object.keys(compacted.n);
-let allowedDeclensions = [1,2,3];
+let allowedDeclensions = [1,2,3,4,5];
 let endingKeys = allEndingKeys.filter(e => allowedDeclensions.includes(parseInt(e.split(",")[1].split(":")[0]))); 
 let endingValues = endingKeys.map(e => compacted.n[e]);
 let currentIndex, currentEnding, spots;
@@ -30,6 +29,11 @@ window.onload = () => {
 }
 </script>
 Declensions:
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(1); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 1); }" />
+<input type="checkbox" name="second" checked onclick="if(this.checked) { allowedDeclensions.push(2); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 2); }" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(3); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 3); }" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(4); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 4); }" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(5); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 5); }" />
 <br />
 The ending is -<span id="endingDisplay" style="font-weight: 900;"></span>.
 Where is one spot where this ending can be found? <br />
@@ -54,8 +58,9 @@ Where is one spot where this ending can be found? <br />
     <option value="gen">Genitive</option>
     <option value="dat">Dative</option>
     <option value="acc">Accusative</option>
-    <option value="abl">ablative</option>
+    <option value="abl">Ablative</option>
     <option value="voc">Vocative</option>
 </select><br />
 <button onclick="check(JSON.parse(declensionSelect.value), genderSelect.value, numberSelect.value, caseSelect.value);">Check</button><br />
 You are <span id="isCorrect" style="font-weight: 900;">undecided</span>.
+<button onclick="alert(allowedDeclensions);">check</button>
