@@ -4,10 +4,17 @@ window.onerror = e => alert(e);
 const allEndingValues = Object.values(compacted.n);
 const allEndingKeys = Object.keys(compacted.n);
 let allowedDeclensions = [1,2,3,4,5];
-let endingKeys = allEndingKeys.filter(e => allowedDeclensions.includes(parseInt(e.split(",")[1].split(":")[0]))); 
-let endingValues = endingKeys.map(e => compacted.n[e]);
-let currentIndex, currentEnding, spots;
+let currentIndex, currentEnding, spots, endingKeys, endingValues;
+let tries = 0;
+let totalDone = 0;
+let numberCorrect = 0;
+let skippedCounter = 0;
+function updateAvail() {
+	endingKeys = allEndingKeys.filter(e => allowedDeclensions.includes(parseInt(e.split(",")[1].split(":")[0]))); 
+	endingValues = endingKeys.map(e => compacted.n[e]);
+}
 function pickOne() {
+	checkButton.removeAttribute("disabled");
 	currentIndex = Math.floor(Math.random()*endingValues.length);
 	currentEnding = endingValues[currentIndex];
 	spots = findEnding(currentEnding).map(e => [parseInt(e.split(",")[1].split(":")[0]), ...([0,1,2].map(x => e.split(":")[1].split(".")[x]))]);
@@ -15,26 +22,37 @@ function pickOne() {
     endingDisplay.innerHTML = currentEnding;
     isCorrect.innerHTML = "unsure";
 }
+
 function check(d,g,n,c) {
 	let success = spots.filter(e => JSON.stringify(e) == JSON.stringify([d,g,n,c])).length > 0;
     if(success) {
+    	if(tries === 0) numberCorrect++;
+    	tries=0;
+        totalDone++;
+        numberTotal++;
     	isCorrect.innerHTML = "correct";
+        document.getElementById("numberTotal").innerHTML = totalDone;
+        document.getElementById("numberCorrect").innerHTML = numberCorrect;
+        document.getElementById("percentCorrect").innerHTML = (numberCorrect/totalDone*100).toFixed(2);
+        checkButton.setAttribute("disabled","");
         window.setTimeout(pickOne,1500);
     } else {
+    	tries++;
     	isCorrect.innerHTML = "incorrect";
     	window.setTimeout(() => isCorrect.innerHTML = "unsure", 1500);
     }
 }
 window.onload = () => {
-	pickOne();
+	updateAvail();
+    pickOne();
 }
 </script>
 Declensions:
-<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(1); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 1); }" />
-<input type="checkbox" name="second" checked onclick="if(this.checked) { allowedDeclensions.push(2); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 2); }" />
-<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(3); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 3); }" />
-<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(4); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 4); }" />
-<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(5); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 5); }" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(1); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 1); } updateAvail();" />
+<input type="checkbox" name="second" checked onclick="if(this.checked) { allowedDeclensions.push(2); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 2); } updateAvail();" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(3); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 3); } updateAvail();" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(4); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 4); } updateAvail();" />
+<input type="checkbox" name="first" checked onclick="if(this.checked) { allowedDeclensions.push(5); allowedDeclensions = [...new Set(allowedDeclensions)]; } else { allowedDeclensions = allowedDeclensions.filter(e => e != 5); } updateAvail();" />
 <br />
 The ending is -<span id="endingDisplay" style="font-weight: 900;"></span>.
 Where is one spot where this ending can be found? <br />
@@ -62,5 +80,7 @@ Where is one spot where this ending can be found? <br />
     <option value="abl">Ablative</option>
     <option value="voc">Vocative</option>
 </select><br />
-<button onclick="check(JSON.parse(declensionSelect.value), genderSelect.value, numberSelect.value, caseSelect.value);">Check</button><br />
-You are <span id="isCorrect" style="font-weight: 900;">undecided</span>.
+<button id="checkButton" onclick="check(JSON.parse(declensionSelect.value), genderSelect.value, numberSelect.value, caseSelect.value);">Check</button><button onclick="pickOne(); skippedCounter++; numberSkipped.innerHTML=skippedCounter;">Skip</button><br />
+You are <span id="isCorrect" style="font-weight: 900;">undecided</span>.<br />
+Score: <span id="numberCorrect">0</span>/<span id="numberTotal">0</span> (<span id="percentCorrect">100</span>%)<br />
+Skipped: <span id="numberSkipped">0</span>
