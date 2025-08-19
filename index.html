@@ -50,7 +50,7 @@ function getSelection() { // set the ending when you pick one from the dropdowns
             return answer.innerHTML = base[nounDeclension.value][nounGender.value][nounCount.value][nounCase.value];
         case "v":  
             endingToggle.innerHTML = "ENDING: -";
-            return answer.innerHTML = base[verbConjugation.value][verbPerson.value][verbCount.value][verbCase.value];
+            return answer.innerHTML = base[verbVoice.value][verbConjugation.value][verbPerson.value][verbCount.value][verbCase.value];
         case "a":  
             endingToggle.innerHTML = "ENDING: -";
             return answer.innerHTML = base[adjectiveDeclension.value][adjectiveGender.value][adjectiveCount.value][adjectiveCase.value];
@@ -75,10 +75,11 @@ function setWhich(txt) { // set the sliders when you click a dropdown option aft
             nounCase.value = parts[1].split(".")[2];
             return getSelection();
         case "v":  
-            verbConjugation.value = parts[0].split(",")[1];
-            verbPerson.value = parts[1].split(".")[0];
-            verbCount.value = parts[1].split(".")[1];
-            verbCase.value = parts[1].split(".")[2];
+            verbVoice.value = parts[0].split(",")[1];
+	    verbConjugation.value = parts[1].split(".")[0];
+            verbPerson.value = parts[1].split(".")[1];
+            verbCount.value = parts[1].split(".")[2];
+            verbCase.value = parts[1].split(".")[3];
             return getSelection();
         case "a":  
             adjectiveDeclension.value = parts[0].split(",")[1];
@@ -161,6 +162,10 @@ window.onload = () => {
     </select>
 </div>
 <div id="verbOptions" class="verb">
+    <select name="verbVoice" id="verbVoice" class="verb">
+	<option value="act">Active</option>
+	<option value="pas">Passive<?option>
+    </select>
     <select name="verbConjugation" id="verbConjugation" class="verb">
         <option value=1>1st</option>
         <option value=2>2nd</option>
@@ -179,6 +184,7 @@ window.onload = () => {
     <select name="verbCase" id="verbCase" class="verb">
         <option value="imp">Imperfect</option>
         <option value="prs">Present</option>
+	<option value="ftr">Future</option>
         <option value="prf">Perfect</option>
     </select>
 </div>

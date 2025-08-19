@@ -22,7 +22,7 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 	},
     {
         "where": [
-            "v.*"
+            "v.act.*"
         ],
         "urls": [
             "https://classicalliberalarts.com/classical-trivium/latin-verb-conjugation-chart/"
@@ -70,6 +70,14 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 			"https://www.thelatinlibrary.com/101/DemonstrativePronouns.pdf",
 			"https://dcc.dickinson.edu/grammar/latin/demonstrative-pronouns-paradigms",
 			"https://ridgelightranch.com/wp-content/uploads/2023/04/Latin-Nouns-and-Pronouns-Chart-by-Julie-v3.pdf"
+		]
+	},
+	{
+		"where": [
+			"v.pas.*"
+		],
+		"urls": [
+			"https://www.nationalarchives.gov.uk/latin/stage-2-latin/lessons/lesson-18-passive-verbs/"
 		]
 	}
 ];
@@ -382,189 +390,374 @@ const endings = {
      * https://classicalliberalarts.com/classical-trivium/latin-verb-conjugation-chart/
      * Feel free to include evidence going against/for these endings, it would really help!
      */
-    "v": [
-        null, // 0th conj. (nonexistent)
-        [ // 1st conj.
-            null,
-            { // 1st person
-                "sg": {
-                    "prs": "\u014D", // o-line
-                    "imp": "abam",
-                    "ftr": "abo",
-                    "prf": "avi"
-                },
-                "pl": {
-                    "prs": "amus",
-                    "imp": "abamus",
-                    "ftr": "abimus",
-                    "prf": "avimus"
-                }
-            },
-            { // 2nd person
-                "sg": {
-                    "prs": "as", // o-line
-                    "imp": "abas",
-                    "ftr": "abis",
-                    "prf": "avisti"
-                },
-                "pl": {
-                    "prs": "atis",
-                    "imp": "abatis",
-                    "ftr": "abitis",
-                    "prf": "avistis"
-                }
-            },
-            { // 3rd person
-                "sg": {
-                    "prs": "at", // o-line
-                    "imp": "abat",
-                    "ftr": "abit",
-                    "prf": "avit"
-                },
-                "pl": {
-                    "prs": "ant",
-                    "imp": "abant",
-                    "ftr": "abunt",
-                    "prf": "erunt"
-                }
-            }
-        ],
-        [ // 2nd conj.
-            null,
-            { // 1st person
-                "sg": {
-                    "prs": "e\u014D",
-                    "imp": "ebam",
-                    "ftr": "ebo",
-                    "prf": "ui"
-                },
-                "pl": {
-                    "prs": "emus",
-                    "imp": "ebamus",
-                    "ftr": "ebimus",
-                    "prf": "uimus"
-                }
-            },
-            { // 2nd person
-                "sg": {
-                    "prs": "es", // o-line
-                    "imp": "ebas",
-                    "ftr": "ebis",
-                    "prf": "uisti"
-                },
-                "pl": {
-                    "prs": "et",
-                    "imp": "ebatis",
-                    "ftr": "ebitis",
-                    "prf": "uistis"
-                }
-            },
-            { // 3rd person
-                "sg": {
-                    "prs": "et",
-                    "imp": "ebat",
-                    "ftr": "ebit",
-                    "prf": "uit"
-                },
-                "pl": {
-                    "prs": "ent",
-                    "imp": "ebant",
-                    "ftr": "ebunt",
-                    "prf": "erunt"
-                }
-            }
-        ],
-        [ // 3rd conj.
-            null,
-            { // 1st person
-                "sg": {
-                    "prs": "\u014D", // o-line
-                    "imp": "ebam",
-                    "ftr": "am",
-                    "prf": "i"
-                },
-                "pl": {
-                    "prs": "imus",
-                    "imp": "ebamus",
-                    "ftr": "emus",
-                    "prf": "imus"
-                }
-            },
-            { // 2nd person
-                "sg": {
-                    "prs": "is",
-                    "imp": "ebas",
-                    "ftr": "es",
-                    "prf": "is"
-                },
-                "pl": {
-                    "prs": "itis",
-                    "imp": "ebatis",
-                    "ftr": "etis",
-                    "prf": "istis"
-                }
-            },
-            { // 3rd person
-                "sg": {
-                    "prs": "it", 
-                    "imp": "ebat",
-                    "ftr": "et",
-                    "prf": "it"
-                },
-                "pl": {
-                    "prs": "unt",
-                    "imp": "bant",
-                    "ftr": "ent",
-                    "prf": "erunt"
-                }
-            }
-        ],
-        [ // 4th conj.
-            null,
-            { // 1st person
-                "sg": {
-                    "prs": "\u014D", // o-line
-                    "imp": "ebam",
-                    "ftr": "am",
-                    "prf": "vi"
-                },
-                "pl": {
-                    "prs": "mus",
-                    "imp": "ebamus",
-                    "ftr": "emus",
-                    "prf": "vimus"
-                }
-            },
-            { // 2nd person
-                "sg": {
-                    "prs": "s",
-                    "imp": "ebas",
-                    "ftr": "es",
-                    "prf": "vis"
-                },
-                "pl": {
-                    "prs": "tis",
-                    "imp": "ebatis",
-                    "ftr": "etis",
-                    "prf": "stis"
-                }
-            },
-            { // 3rd person
-                "sg": {
-                    "prs": "t", 
-                    "imp": "ebat",
-                    "ftr": "et",
-                    "prf": "vit"
-                },
-                "pl": {
-                    "prs": "unt",
-                    "imp": "ebant",
-                    "ftr": "ent",
-                    "prf": "verunt"
-                }
-            }
-        ]
-    ],
+    "v": {
+	"act": [ // active voice
+		null, // 0th conj. (nonexistent)
+		[ // 1st conj.
+		    null,
+		    { // 1st person
+			"sg": {
+			    "prs": "\u014D", // o-line
+			    "imp": "abam",
+			    "ftr": "abo",
+			    "prf": "avi"
+			},
+			"pl": {
+			    "prs": "amus",
+			    "imp": "abamus",
+			    "ftr": "abimus",
+			    "prf": "avimus"
+			}
+		    },
+		    { // 2nd person
+			"sg": {
+			    "prs": "as", // o-line
+			    "imp": "abas",
+			    "ftr": "abis",
+			    "prf": "avisti"
+			},
+			"pl": {
+			    "prs": "atis",
+			    "imp": "abatis",
+			    "ftr": "abitis",
+			    "prf": "avistis"
+			}
+		    },
+		    { // 3rd person
+			"sg": {
+			    "prs": "at", // o-line
+			    "imp": "abat",
+			    "ftr": "abit",
+			    "prf": "avit"
+			},
+			"pl": {
+			    "prs": "ant",
+			    "imp": "abant",
+			    "ftr": "abunt",
+			    "prf": "erunt"
+			}
+		    }
+		],
+		[ // 2nd conj.
+		    null,
+		    { // 1st person
+			"sg": {
+			    "prs": "e\u014D",
+			    "imp": "ebam",
+			    "ftr": "ebo",
+			    "prf": "ui"
+			},
+			"pl": {
+			    "prs": "emus",
+			    "imp": "ebamus",
+			    "ftr": "ebimus",
+			    "prf": "uimus"
+			}
+		    },
+		    { // 2nd person
+			"sg": {
+			    "prs": "es", // o-line
+			    "imp": "ebas",
+			    "ftr": "ebis",
+			    "prf": "uisti"
+			},
+			"pl": {
+			    "prs": "et",
+			    "imp": "ebatis",
+			    "ftr": "ebitis",
+			    "prf": "uistis"
+			}
+		    },
+		    { // 3rd person
+			"sg": {
+			    "prs": "et",
+			    "imp": "ebat",
+			    "ftr": "ebit",
+			    "prf": "uit"
+			},
+			"pl": {
+			    "prs": "ent",
+			    "imp": "ebant",
+			    "ftr": "ebunt",
+			    "prf": "erunt"
+			}
+		    }
+		],
+		[ // 3rd conj.
+		    null,
+		    { // 1st person
+			"sg": {
+			    "prs": "\u014D", // o-line
+			    "imp": "ebam",
+			    "ftr": "am",
+			    "prf": "i"
+			},
+			"pl": {
+			    "prs": "imus",
+			    "imp": "ebamus",
+			    "ftr": "emus",
+			    "prf": "imus"
+			}
+		    },
+		    { // 2nd person
+			"sg": {
+			    "prs": "is",
+			    "imp": "ebas",
+			    "ftr": "es",
+			    "prf": "is"
+			},
+			"pl": {
+			    "prs": "itis",
+			    "imp": "ebatis",
+			    "ftr": "etis",
+			    "prf": "istis"
+			}
+		    },
+		    { // 3rd person
+			"sg": {
+			    "prs": "it", 
+			    "imp": "ebat",
+			    "ftr": "et",
+			    "prf": "it"
+			},
+			"pl": {
+			    "prs": "unt",
+			    "imp": "bant",
+			    "ftr": "ent",
+			    "prf": "erunt"
+			}
+		    }
+		],
+		[ // 4th conj.
+		    null,
+		    { // 1st person
+			"sg": {
+			    "prs": "\u014D", // o-line
+			    "imp": "ebam",
+			    "ftr": "am",
+			    "prf": "vi"
+			},
+			"pl": {
+			    "prs": "mus",
+			    "imp": "ebamus",
+			    "ftr": "emus",
+			    "prf": "vimus"
+			}
+		    },
+		    { // 2nd person
+			"sg": {
+			    "prs": "s",
+			    "imp": "ebas",
+			    "ftr": "es",
+			    "prf": "vis"
+			},
+			"pl": {
+			    "prs": "tis",
+			    "imp": "ebatis",
+			    "ftr": "etis",
+			    "prf": "stis"
+			}
+		    },
+		    { // 3rd person
+			"sg": {
+			    "prs": "t", 
+			    "imp": "ebat",
+			    "ftr": "et",
+			    "prf": "vit"
+			},
+			"pl": {
+			    "prs": "unt",
+			    "imp": "ebant",
+			    "ftr": "ent",
+			    "prf": "verunt"
+			}
+		    }
+		]
+	],
+	"pas": [
+		null, // 0th conj. (nonexistant)
+		[ // 1st conj.
+			null, // 0th person (nonexistant)
+			{ // 1st
+				"sg": {
+					"prs": "ar",
+					"imp": "abar",
+					"ftr": "abor",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "amur",
+					"imp": "abamur",
+					"ftr": "abimur",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 2nd
+				"sg": {
+					"prs": "aris",
+					"imp": "abaris",
+					"ftr": "aberis",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "amini",
+					"imp": "abamini",
+					"ftr": "abimini",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 3rd
+				"sg": {
+					"prs": "atur",
+					"imp": "abatur",
+					"ftr": "abitur",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "antur",
+					"imp": "abantur",
+					"ftr": "abuntur",
+					"prf": UNKNOWN
+				}
+			},
+		],
+		[ // 2nd conj.
+			null, // 0th person (nonexistant)
+			{ // 1st
+				"sg": {
+					"prs": "er",
+					"imp": "ebar",
+					"ftr": "ebor",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "emur",
+					"imp": "ebamur",
+					"ftr": "ebimur",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 2nd
+				"sg": {
+					"prs": "eris",
+					"imp": "ebaris",
+					"ftr": "eberis",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "emini",
+					"imp": "ebamini",
+					"ftr": "ebimini",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 3rd
+				"sg": {
+					"prs": "etur",
+					"imp": "ebatur",
+					"ftr": "ebitur",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "entur",
+					"imp": "ebantur",
+					"ftr": "ebuntur",
+					"prf": UNKNOWN
+				}
+			},
+		],
+		[ // 3rd conj.
+			null, // 0th person (nonexistant)
+			{ // 1st
+				"sg": {
+					"prs": "or",
+					"imp": "bar",
+					"ftr": "ar",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "imur",
+					"imp": "ibamur",
+					"ftr": "emur",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 2nd
+				"sg": {
+					"prs": "eris",
+					"imp": "ebaris",
+					"ftr": "eris",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "imini",
+					"imp": "ibamini",
+					"ftr": "emini",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 3rd
+				"sg": {
+					"prs": "itur",
+					"imp": "ibatur",
+					"ftr": "etur",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "untur",
+					"imp": "ubantur",
+					"ftr": "entur",
+					"prf": UNKNOWN
+				}
+			}
+		],
+		[ // 4th conj.
+			null, // 0th person (nonexistant)
+			{ // 1st
+				"sg": {
+					"prs": "ior",
+					"imp": "iebar",
+					"ftr": "iar",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "imur",
+					"imp": "iebamur",
+					"ftr": "iemur",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 2nd
+				"sg": {
+					"prs": "iris",
+					"imp": "iebaris",
+					"ftr": "ieris",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "imini",
+					"imp": "iebamini",
+					"ftr": "iemini",
+					"prf": UNKNOWN
+				}
+			},
+			{ // 3rd
+				"sg": {
+					"prs": "itur",
+					"imp": "iebatur",
+					"ftr": "ietur",
+					"prf": UNKNOWN
+				},
+				"pl": {
+					"prs": "iuntur",
+					"imp": "iebantur",
+					"ftr": "ientur",
+					"prf": UNKNOWN
+				}
+			},
+		],
+    	]
+    },
     "a": [
         null,
         {
@@ -885,16 +1078,18 @@ const compacted = { // compacts all the endings into a single layer object
             )
         )
     ).flat(Infinity))),
-    "v": Object.assign({}, ...([1,2,3,4].map(d => // conjugations
-        [1,2,3].map(p => // person (p)
-            ["sg", "pl"].map(n => // number (n)
-                ["prs", "imp", "ftr", "prf"].map(c => { // case (or in this case, tense) (c)
-                    let obj = {};
-                    obj[`v,${d}:${p}.${n}.${c}`] = normalized(endings.v[d][p][n][c]); // v,<declension>:<person>.<number>.<tense>
-                    return obj;
-                })
-            )
-        )
+    "v": Object.assign({}, ...(["act","pas"].map(v => 
+	[1,2,3,4].map(d => // conjugations
+		[1,2,3].map(p => // person (p)
+		    ["sg", "pl"].map(n => // number (n)
+			["prs", "imp", "ftr", "prf"].map(c => { // case (or in this case, tense) (c)
+			    let obj = {};
+			    obj[`v,${v}:${d}.${p}.${n}.${c}`] = normalized(endings.v[v][d][p][n][c]); // v,<declension>:<person>.<number>.<tense>
+			    return obj;
+			})
+		    )
+		)
+	    )
     ).flat(Infinity))),
     "a": Object.assign({}, ...([1,2,3].map(d => // declension (d)
         ["m","f","n"].map(g => // gender (g)
