@@ -17,7 +17,7 @@
         <lI>Demonstrative pronouns (hic, haec, hoc/ille, illa, illud)</lI>
     </ul>
     The <i>website</i> for LEDB (which you're on right now) has a ending picker below where you can plug in the aspects of the ending you're looking for (e.g. gender, number, case, and declension) and get the resulting ending out.<br />
-    The actual database itself can be found <a href="https://matthy.dev/ledb.js">here</a>, and is encoded in JSON within JavaScript, to allow missing/impossible endings to be indicated and have customized appearances (by default, unknown endings/endings missing in the database will mark as a "?", "any" endings will be marked as a "*", and impossible endings with a "&#9746;". 
+    The actual database itself can be found <a href="./ledb.js">here</a>, and is encoded in JSON within JavaScript, to allow missing/impossible endings to be indicated and have customized appearances (by default, unknown endings/endings missing in the database will mark as a "?", "any" endings will be marked as a "*", and impossible endings with a "&#9746;". 
         Also note that Unicode letters or letters with lines above them like &#x0101, &#x0113, &#x012b, &#x014d, or &#x016b are encoded with Unicode escape sequences in the database itself, as \u0101, \u0113, \u012b, \u014d, or \u016b respectively.
 </p>
 <hr />
@@ -127,7 +127,7 @@ window.onload = () => {
 <p>To use the ending picker, select the part of speech you're looking for and then set the dropdowns accordingly to look for the ending.
     For example, if you have "<abbr title="brother, sibling">frater, fratis, m.</abbr>" you'd look for 3rd declension masculine nouns. </p>
 <b id="endingToggle">ENDING: -</b><b id="answer">a</b> <br />
-<label for="partofspeech">Part of Speech</label>
+<label for="partOfSpeech">Part of Speech</label>
 <select name="partofspeech" id="partOfSpeech" onchange="updateDisables(this.value);">
     <option value="n">Noun</option>
     <option value="v">Verb</option>

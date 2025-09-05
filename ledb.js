@@ -83,7 +83,7 @@ const SOURCES_USED = [ // * indicates wildcard/all of the above
 ];
 const endings = {
     "n": [
-        null, // 0th declension (nonexistent)
+        IMPOSSIBLE, // 0th declension (nonexistent)
         { // 1st declension
             "m": {
                 "sg": {
@@ -180,7 +180,7 @@ const endings = {
             "n": {
                 "sg": {
                     "nom": "um",
-                    "voc": "e",
+                    "voc": "um",
                     "gen": "\u012B",
                     "dat": "o",
                     "acc": "um",
@@ -200,7 +200,7 @@ const endings = {
             "m": {
                 "sg": {
                     "nom": ANY,
-                    "voc": UNKNOWN,
+                    "voc": ANY,
                     "gen": "is",
                     "dat": "\u012B",
                     "acc": "em",
@@ -218,7 +218,7 @@ const endings = {
             "f": {
                 "sg": {
                     "nom": ANY,
-                    "voc": UNKNOWN,
+                    "voc": ANY,
                     "gen": "is",
                     "dat": "\u012B",
                     "acc": "em",
@@ -236,7 +236,7 @@ const endings = {
             "n": {
                 "sg": {
                     "nom": ANY,
-                    "voc": UNKNOWN,
+                    "voc": ANY,
 					"gen": "is",
                     "dat": "\u012B",
                     "acc": ANY,
@@ -244,7 +244,7 @@ const endings = {
                 }, 
                 "pl": {
                     "nom": "a",
-                    "voc": "\u012B",
+                    "voc": "a",
                     "gen": "um",
                     "dat": "ibus",
                     "acc": "a",
@@ -392,9 +392,9 @@ const endings = {
      */
     "v": {
 	"act": [ // active voice
-		null, // 0th conj. (nonexistent)
+		IMPOSSIBLE, // 0th conj. (nonexistent)
 		[ // 1st conj.
-		    null,
+		    IMPOSSIBLE,
 		    { // 1st person
 			"sg": {
 			    "prs": "\u014D", // o-line
@@ -439,7 +439,7 @@ const endings = {
 		    }
 		],
 		[ // 2nd conj.
-		    null,
+		    IMPOSSIBLE,
 		    { // 1st person
 			"sg": {
 			    "prs": "e\u014D",
@@ -484,7 +484,7 @@ const endings = {
 		    }
 		],
 		[ // 3rd conj.
-		    null,
+		    IMPOSSIBLE,
 		    { // 1st person
 			"sg": {
 			    "prs": "\u014D", // o-line
@@ -529,7 +529,7 @@ const endings = {
 		    }
 		],
 		[ // 4th conj.
-		    null,
+		    IMPOSSIBLE,
 		    { // 1st person
 			"sg": {
 			    "prs": "\u014D", // o-line
@@ -575,9 +575,9 @@ const endings = {
 		]
 	],
 	"pas": [
-		null, // 0th conj. (nonexistant)
+		IMPOSSIBLE, // 0th conj. (nonexistant)
 		[ // 1st conj.
-			null, // 0th person (nonexistant)
+			IMPOSSIBLE, // 0th person (nonexistant)
 			{ // 1st
 				"sg": {
 					"prs": "ar",
@@ -622,7 +622,7 @@ const endings = {
 			},
 		],
 		[ // 2nd conj.
-			null, // 0th person (nonexistant)
+			IMPOSSIBLE, // 0th person (nonexistant)
 			{ // 1st
 				"sg": {
 					"prs": "er",
@@ -667,7 +667,7 @@ const endings = {
 			},
 		],
 		[ // 3rd conj.
-			null, // 0th person (nonexistant)
+			IMPOSSIBLE, // 0th person (nonexistant)
 			{ // 1st
 				"sg": {
 					"prs": "or",
@@ -712,7 +712,7 @@ const endings = {
 			}
 		],
 		[ // 4th conj.
-			null, // 0th person (nonexistant)
+			IMPOSSIBLE, // 0th person (nonexistant)
 			{ // 1st
 				"sg": {
 					"prs": "ior",
@@ -759,7 +759,7 @@ const endings = {
     	]
     },
     "a": [
-        null,
+        IMPOSSIBLE,
         {
             "m": {
                 "sg": {
@@ -1121,7 +1121,7 @@ const compacted = { // compacts all the endings into a single layer object
                 })
             )
         )
-    ).flat(Infinity))),
+    ).flat(Infinity)))
 };
 /* General method to flatten all of the endings to make searching easier, scrapped because it doesn't work and unnecessary
 const removeDiacritics = e => e.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -1133,8 +1133,8 @@ const anyAreOfType = (li, typeClass) => {
     if(li.constructor == Object) return Object.keys(li).filter(e => li[e] instanceof typeClass).length != 0; 
 };
 const removeNulls = (li) => { 
-    if(li instanceof Array) return li.filter(e => e != null);
-    if(li.constructor == Object) return Object.keys(li).filter(e => li[e] != null && li[e] != undefined).map(e => li[e]);
+    if(li instanceof Array) return li.filter(e => e != IMPOSSIBLEnull);
+    if(li.constructor == Object) return Object.keys(li).filter(e => li[e] != IMPOSSIBLEnull && li[e] != undefined).map(e => li[e]);
 };
 const flattenAllArrays = v => {
     if(v instanceof Array) return v.map(e => e instanceof Array ? e.flat(Infinity) : e).flat(Infinity);
